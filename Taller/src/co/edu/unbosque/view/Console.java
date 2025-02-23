@@ -26,6 +26,10 @@ public class Console {
 		System.out.println(txt);
 	}
 
+	public boolean checkCase() {
+		return sc.hasNextLine();
+	}
+
 	public void print(String txt) {
 		System.out.print(txt);
 	}
