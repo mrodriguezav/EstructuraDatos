@@ -1,5 +1,5 @@
 package co.edu.unbosque.controller;
-
+import java.util.Scanner;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller {
@@ -8,7 +8,6 @@ public class Controller {
 
 	public Controller() {
 		vf = new ViewFacade();
-		run();
 	}
 
 	public void run() {
@@ -64,55 +63,50 @@ public class Controller {
 
 	public void solve623() {
 
-		int num = vf.getCon().readInt();
-
 	}
 
 	public void solve10093() {
+		
+		        String[] inputs = {"3", "5", "A"}; // Sample inputs
 
-		while (vf.getCon().checkCase()) {
-			String in = vf.getCon().readLine();
-			int max = 0, sum = 0, n = 0;
-
-			for (int i = 0; i < in.length(); i++) {
-				char c = in.charAt(i);
-
-				if (c >= '0' && c <= '9') {
-					n = c - '0';
-				} else if (c >= 'A' && c <= 'Z') {
-					n = c - 'A' + 10;
-				} else if (c >= 'a' && c <= 'z') {
-					n = c - 'a' + 36;
-				} else {
-					continue;
-				}
-
-				if (n > max)
-					max = n;
-				sum += n;
-				if (sum == 0) {
-					System.out.println("2");
-					continue;
-				}
-
-				boolean found = false;
-				for (int base = max + 1; base <= 62; base++) {
-					if (sum % (base - 1) == 0) {
-						System.out.println(base);
-						found = true;
-						break;
-					}
-				}
-
-				if (!found) {
-					System.out.println("such number is impossible!");
-				}
-
-			}
-
+		        for (String number : inputs) {
+		        	findSmallestBase(number);
+		            System.out.println();
+		        }
+		    
 		}
 
-	}
+	public static String findSmallestBase(String number) {
+        String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        int maxDigitValue = 2;
+
+        // Find the maximum digit value in the number
+        for (char c : number.toCharArray()) {
+            int digitValue = symbols.indexOf(c);
+            if (digitValue > maxDigitValue) {
+                maxDigitValue = digitValue;
+            }
+        }
+
+        // Minimum base must be greater than the highest digit
+        int minBase = maxDigitValue + 1 + 1;
+
+        // Check for each base from minBase to 62
+        for (int base = minBase; base <= 62; base++) {
+            try {
+                long value = Long.parseLong(number, base);
+                if (value % (base - 1) == 0) {
+                    return String.valueOf(base);
+                }
+            } catch (NumberFormatException e) {
+                // Ignore invalid base conversions
+            }
+        }
+
+        return "such number is impossible!";
+    }	
+		
+	
 
 	public void solve10579() {
 
