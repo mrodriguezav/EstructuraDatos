@@ -1,5 +1,7 @@
 package co.edu.unbosque.controller;
 
+import java.math.BigInteger;
+
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller {
@@ -164,7 +166,20 @@ public class Controller {
 //	}
 
 	public void solve10579() {
+		// Fibonacci
+		int[] inputs = { 3, 100 };
 
+		for (int number : inputs) {
+			fibonacci(number);
+		}
+
+	}
+
+	public static BigInteger fibonacci(int n) {
+		if (n <= 1) {
+			return BigInteger.valueOf(n);
+		}
+		return fibonacci(n - 1).add(fibonacci(n - 2));
 	}
 
 	public void solve11068() {
