@@ -22,6 +22,10 @@ public class Console {
 		return sc.nextLine();
 	}
 
+	public double readDouble() {
+		return sc.nextDouble();
+	}
+
 	public void printLine(String txt) {
 		System.out.println(txt);
 	}
